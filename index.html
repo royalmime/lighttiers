@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LightTiers PvP Tierlist</title>
+    <meta
+      name="description"
+      content="LightTiers PvP Tierlist ranks the top Minecraft PvP players across multiple game modes and regions."
+    />
+    <meta property="og:title" content="LightTiers PvP Tierlist" />
+    <meta
+      property="og:description"
+      content="Modern Minecraft PvP tierlist tracking the strongest players across all major game modes."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1200&q=80" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="LightTiers PvP Tierlist" />
+    <meta
+      name="twitter:description"
+      content="LightTiers PvP Tierlist ranks the top Minecraft PvP players across multiple game modes and regions."
+    />
+    <meta
+      name="twitter:image"
+      content="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1200&q=80"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;700&family=Poppins:wght@400;500;600;700;800&family=Roboto:wght@400;500;700&family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;600;700&family=Raleway:wght@400;500;600;700;800&family=Nunito:wght@400;500;600;700;800&family=Lora:wght@400;600;700&family=Merriweather:wght@400;700&family=Playfair+Display:wght@400;600;700;800&family=Oswald:wght@400;500;600;700&family=Josefin+Sans:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #060b12;
+        --bg-2: #0d1624;
+        --bg-3: #121f2d;
+        --panel: rgba(17, 24, 39, 0.85);
+        --panel-strong: rgba(9, 12, 20, 0.94);
+        --panel-soft: rgba(24, 34, 48, 0.9);
+        --text: #edf2ff;
+        --muted: #a9b5c9;
+        --accent: #67d5ff;
+        --accent-2: #8d7dff;
+        --border: rgba(255, 255, 255, 0.08);
+        --shadow: 0 24px 60px rgba(0, 0, 0, 0.36);
+        --gold: #f7d66d;
+        --silver: #dfe6f3;
+        --bronze: #d9a16a;
+        --success: #4be0b0;
+        --danger: #ff6a7a;
+        --warning: #ffc76a;
+        --radius: 18px;
+        --font-body: 'Inter', sans-serif;
+        --font-heading: 'Orbitron', sans-serif;
+      }
+
+      * { box-sizing: border-box; }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background:
+          radial-gradient(circle at top, rgba(103, 213, 255, 0.12), transparent 40%),
+          linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+        color: var(--text);
+        font-family: var(--font-body);
+        transition: background 0.25s ease, color 0.25s ease;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image: var(--page-bg, none);
+        background-size: cover;
+        background-position: center;
+        opacity: 0.18;
+        pointer-events: none;
+      }
+
+      button, input, select, textarea {
+        font: inherit;
+      }
+
+      a { color: inherit; text-decoration: none; }
+
+      .app-shell {
+        position: relative;
+        z-index: 1;
+      }
+
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 28px;
+        backdrop-filter: blur(14px);
+        background: rgba(6, 11, 18, 0.7);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        min-width: 0;
+      }
+
+      .brand-mark {
+        width: 42px;
+        height: 42px;
+        display: grid;
+        place-items: center;
+        border-radius: 12px;
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        box-shadow: 0 0 28px rgba(103, 213, 255, 0.35);
+        overflow: hidden;
+      }
+
+      .brand-mark img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .brand-name {
+        font-family: var(--font-heading);
+        font-size: 1.15rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .topbar-actions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .discord-btn, .btn, .ghost-btn, .admin-btn {
+        border: 1px solid transparent;
+        border-radius: 12px;
+        padding: 0.75rem 1.1rem;
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        color: white;
+        font-weight: 700;
+        cursor: pointer;
+        transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
+        box-shadow: 0 10px 25px rgba(122, 97, 255, 0.22);
+      }
+
+      .discord-btn:hover, .btn:hover, .ghost-btn:hover, .admin-btn:hover {
+        transform: translateY(-1px);
+      }
+
+      .theme-select {
+        background: rgba(255,255,255,0.04);
+        border: 1px solid var(--border);
+        color: var(--text);
+        border-radius: 12px;
+        padding: 0.7rem 0.9rem;
+        min-width: 150px;
+      }
+
+      .page {
+        width: min(1240px, calc(100% - 32px));
+        margin: 34px auto 40px;
+      }
+
+      .hero {
+        display: grid;
+        gap: 22px;
+        margin-bottom: 28px;
+      }
+
+      .hero-copy {
+        background: rgba(10, 17, 25, 0.72);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 28px 30px;
+        box-shadow: var(--shadow);
+      }
+
+      .hero-banner {
+        min-height: 150px;
+        border-radius: var(--radius);
+        border: 1px solid var(--border);
+        background-size: cover;
+        background-position: center;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .hero-banner::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(6,11,18,0.08), rgba(6,11,18,0.58));
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 0.4rem 0.7rem;
+        border: 1px solid rgba(103,213,255,0.25);
+        background: rgba(103,213,255,0.08);
+        color: var(--accent);
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        border-radius: 999px;
+        font-size: 0.75rem;
+      }
+
+      h1 {
+        margin: 14px 0 10px;
+        font-family: var(--font-heading);
+        font-size: clamp(2.7rem, 3vw, 4.4rem);
+        line-height: 0.96;
+        letter-spacing: -0.05em;
+      }
+
+      .subtitle {
+        margin: 0;
+        color: var(--muted);
+        font-size: clamp(1rem, 1.4vw, 1.2rem);
+      }
+
+      .podium {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+        margin: 18px 0 26px;
+      }
+
+      .podium-card {
+        position: relative;
+        padding: 18px 16px 16px;
+        border-radius: var(--radius);
+        background: rgba(14, 20, 29, 0.9);
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+        min-height: 220px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+      }
+
+      .podium-card.rank-1 {
+        transform: translateY(-8px);
+        border-color: rgba(247, 214, 109, 0.65);
+        box-shadow: 0 0 0 1px rgba(247, 214, 109, 0.2), 0 24px 60px rgba(247, 214, 109, 0.12);
+      }
+
+      .podium-card.rank-2 {
+        border-color: rgba(223, 230, 243, 0.65);
+      }
+
+      .podium-card.rank-3 {
+        border-color: rgba(217, 161, 106, 0.65);
+      }
+
+      .podium-card.rank-1::before {
+        content: "👑";
+        position: absolute;
+        right: 16px;
+        top: 14px;
+        font-size: 2rem;
+        filter: drop-shadow(0 0 18px rgba(247,214,109,0.85));
+      }
+
+      .podium-rank {
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--muted);
+      }
+
+      .podium-profile {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-top: 8px;
+      }
+
+      .podium-profile .avatar {
+        width: 56px;
+        height: 56px;
+      }
+
+      .podium-name {
+        font-weight: 800;
+        font-size: 1.2rem;
+      }
+
+      .podium-points {
+        color: var(--accent);
+        font-weight: 700;
+        margin-top: 6px;
+      }
+
+      .podium-meta {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        margin-top: 12px;
+        color: var(--muted);
+        font-size: 0.8rem;
+      }
+
+      .toolbar {
+        background: rgba(12, 18, 27, 0.8);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 18px;
+        box-shadow: var(--shadow);
+      }
+
+      .gamemode-tabs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 14px;
+      }
+
+      .mode-tab {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 0.7rem 0.85rem;
+        border-radius: 12px;
+        background: rgba(255,255,255,0.02);
+        border: 1px solid var(--border);
+        color: var(--text);
+        cursor: pointer;
+        transition: 0.2s ease;
+      }
+
+      .mode-tab.active {
+        background: linear-gradient(135deg, rgba(103,213,255,0.18), rgba(141,125,255,0.15));
+        border-color: rgba(103,213,255,0.4);
+      }
+
+      .mode-icon {
+        width: 22px;
+        height: 22px;
+        border-radius: 8px;
+        object-fit: cover;
+        flex-shrink: 0;
+      }
+
+      .filter-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        align-items: center;
+      }
+
+      .search-box, .region-select {
+        border: 1px solid var(--border);
+        background: rgba(255,255,255,0.03);
+        color: var(--text);
+        border-radius: 12px;
+        padding: 0.8rem 0.9rem;
+      }
+
+      .search-box {
+        flex: 1 1 250px;
+        min-width: 180px;
+      }
+
+      .region-select {
+        min-width: 170px;
+      }
+
+      .ranking-list {
+        margin-top: 22px;
+        display: grid;
+        gap: 12px;
+      }
+
+      .tier-row {
+        display: grid;
+        grid-template-columns: 60px 1.1fr 120px 120px 120px 176px;
+        align-items: center;
+        gap: 14px;
+        padding: 12px 14px;
+        border-radius: 14px;
+        border: 1px solid var(--border);
+        background: rgba(17, 25, 36, 0.8);
+        cursor: pointer;
+        transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
+      }
+
+      .tier-row:hover {
+        transform: translateY(-1px);
+        border-color: rgba(255,255,255,0.12);
+      }
+
+      .tier-row.rank-1 { border-left: 4px solid var(--gold); }
+      .tier-row.rank-2 { border-left: 4px solid var(--silver); }
+      .tier-row.rank-3 { border-left: 4px solid var(--bronze); }
+
+      .rank-num {
+        font-weight: 800;
+        color: var(--muted);
+      }
+
+      .player-info {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        min-width: 0;
+      }
+
+      .player-info .avatar {
+        width: 42px;
+        height: 42px;
+      }
+
+      .player-name-wrap {
+        min-width: 0;
+      }
+
+      .player-name {
+        font-weight: 700;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .country-chip {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 32px;
+        height: 24px;
+        padding: 0 8px;
+        border-radius: 999px;
+        font-size: 0.72rem;
+        font-weight: 700;
+        background: rgba(255,255,255,0.05);
+        border: 1px solid var(--border);
+      }
+
+      .points-cell, .tier-badge-cell, .title-pill {
+        text-align: center;
+      }
+
+      .tier-badge-cell {
+        display: flex;
+        justify-content: center;
+      }
+
+      .tier-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 62px;
+        padding: 0.5rem 0.72rem;
+        border-radius: 999px;
+        font-size: 0.74rem;
+        font-weight: 800;
+        letter-spacing: 0.04em;
+        background: rgba(255,255,255,0.06);
+        border: 1px solid rgba(255,255,255,0.12);
+        color: var(--text);
+      }
+
+      .tier-badge.ht {
+        background: linear-gradient(135deg, rgba(247,214,109,0.2), rgba(255,181,56,0.18));
+        border-color: rgba(247,214,109,0.5);
+        color: #fbe7a5;
+      }
+
+      .tier-badge.lt {
+        background: rgba(255,255,255,0.02);
+        border: 1px solid rgba(255,255,255,0.36);
+        color: var(--text);
+      }
+
+      .player-title {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        min-width: 130px;
+        padding: 0.42rem 0.7rem;
+        border-radius: 999px;
+        background: rgba(103,213,255,0.08);
+        color: var(--accent);
+        font-weight: 700;
+        font-size: 0.7rem;
+        letter-spacing: 0.04em;
+        border: 1px solid rgba(103,213,255,0.24);
+      }
+
+      .empty-state {
+        padding: 36px 24px;
+        border: 1px dashed var(--border);
+        border-radius: var(--radius);
+        text-align: center;
+        background: rgba(255,255,255,0.02);
+        color: var(--muted);
+      }
+
+      .avatar {
+        width: 52px;
+        height: 52px;
+        border-radius: 16px;
+        object-fit: cover;
+        border: 1px solid rgba(255,255,255,0.08);
+        background: rgba(255,255,255,0.04);
+        box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02);
+      }
+
+      .modal-backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(2, 8, 14, 0.78);
+        backdrop-filter: blur(8px);
+        display: none;
+        z-index: 50;
+      }
+
+      .modal-backdrop.open {
+        display: block;
+      }
+
+      .player-modal {
+        position: fixed;
+        inset: 50% auto auto 50%;
+        transform: translate(-50%, -50%);
+        width: min(880px, calc(100% - 24px));
+        max-height: 90vh;
+        overflow: auto;
+        background: rgba(9, 14, 25, 0.96);
+        border: 1px solid var(--border);
+        border-radius: calc(var(--radius) + 8px);
+        box-shadow: var(--shadow);
+        display: none;
+        z-index: 60;
+      }
+
+      .player-modal.open {
+        display: block;
+      }
+
+      .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        border-bottom: 1px solid var(--border);
+        padding: 18px 22px;
+      }
+
+      .modal-header h3 {
+        margin: 0;
+        font-size: clamp(1.4rem, 2vw, 2rem);
+        font-family: var(--font-heading);
+      }
+
+      .close-btn {
+        border: 1px solid var(--border);
+        background: rgba(255,255,255,0.02);
+        color: var(--text);
+        width: 38px;
+        height: 38px;
+        border-radius: 12px;
+        cursor: pointer;
+      }
+
+      .modal-content {
+        padding: 22px;
+      }
+
+      .modal-top {
+        display: flex;
+        gap: 18px;
+        align-items: center;
+        margin-bottom: 18px;
+      }
+
+      .modal-avatar {
+        width: 96px;
+        height: 96px;
+        border-radius: 22px;
+      }
+
+      .modal-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 16px;
+        align-items: center;
+      }
+
+      .meta-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 0.5rem 0.8rem;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.04);
+        border: 1px solid var(--border);
+        font-weight: 600;
+      }
+
+      .compare-panel {
+        margin-top: 18px;
+        background: rgba(255,255,255,0.02);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 16px;
+      }
+
+      .compare-controls {
+        display: flex;
+        gap: 14px;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-bottom: 12px;
+      }
+
+      .compare-select {
+        flex: 1 1 220px;
+        min-width: 0;
+        border: 1px solid var(--border);
+        background: rgba(255,255,255,0.03);
+        color: var(--text);
+        border-radius: 12px;
+        padding: 0.8rem 0.9rem;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        overflow: hidden;
+      }
+
+      th, td {
+        text-align: left;
+        padding: 0.8rem 0.7rem;
+        border-bottom: 1px solid var(--border);
+      }
+
+      th {
+        color: var(--muted);
+        font-size: 0.78rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .winner-cell {
+        background: rgba(75, 224, 176, 0.08);
+      }
+
+      .compare-row-win {
+        color: var(--success);
+        font-weight: 700;
+      }
+
+      .modal-gamemode-bars {
+        display: grid;
+        gap: 12px;
+      }
+
+      .bar-row {
+        display: grid;
+        grid-template-columns: 130px 1fr auto;
+        gap: 12px;
+        align-items: center;
+      }
+
+      .bar-label {
+        color: var(--muted);
+        font-weight: 600;
+      }
+
+      .bar-track {
+        width: 100%;
+        height: 12px;
+        background: rgba(255,255,255,0.06);
+        border-radius: 999px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .bar-fill {
+        height: 100%;
+        border-radius: inherit;
+        background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      }
+
+      .bar-score {
+        font-weight: 800;
+        color: var(--accent);
+      }
+
+      .admin-bar {
+        display: none;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 10px;
+        margin-bottom: 16px;
+      }
+
+      .admin-bar.visible {
+        display: flex;
+      }
+
+      .admin-btn {
+        padding: 0.65rem 0.85rem;
+        font-size: 0.9rem;
+      }
+
+      .admin-ghost {
+        background: rgba(255,255,255,0.04);
+        border-color: var(--border);
+        color: var(--text);
+        box-shadow: none;
+      }
+
+      .panel {
+        background: rgba(12, 18, 27, 0.8);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 20px;
+        box-shadow: var(--shadow);
+      }
+
+      .settings-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 14px;
+      }
+
+      label {
+        display: block;
+        font-size: 0.82rem;
+        color: var(--muted);
+        margin-bottom: 8px;
+      }
+
+      input[type="text"],
+      input[type="url"],
+      input[type="number"],
+      select,
+      textarea {
+        width: 100%;
+        border: 1px solid var(--border);
+        background: rgba(255,255,255,0.03);
+        color: var(--text);
+        border-radius: 10px;
+        padding: 0.72rem 0.8rem;
+      }
+
+      input[type="color"] {
+        width: 100%;
+        height: 42px;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        background: rgba(255,255,255,0.03);
+        padding: 0;
+      }
+
+      .settings-actions, .submit-actions {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-top: 18px;
+      }
+
+      .ghost-btn {
+        background: rgba(255,255,255,0.03);
+        border-color: var(--border);
+        box-shadow: none;
+      }
+
+      .form-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 14px;
+      }
+
+      .tier-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 12px;
+        margin-top: 8px;
+      }
+
+      .input-inline {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+
+      .input-inline > * { flex: 1; }
+
+      .danger-btn {
+        background: linear-gradient(135deg, rgba(255,106,122,0.9), rgba(164, 60, 90, 0.88));
+      }
+
+      .panel.hidden { display: none; }
+
+      @media (max-width: 860px) {
+        .podium {
+          grid-template-columns: 1fr;
+        }
+
+        .tier-row {
+          grid-template-columns: 40px 1fr 84px;
+          grid-template-areas:
+            "rank player player"
+            "rank title points"
+            "tier tier tier";
+        }
+
+        .tier-row > * { margin: 0; }
+
+        .rank-num { grid-area: rank; }
+        .player-info { grid-area: player; }
+        .title-pill { grid-area: title; }
+        .points-cell { grid-area: points; text-align: right; }
+        .tier-badge-cell { grid-area: tier; justify-content: flex-start; }
+      }
+
+      @media (max-width: 600px) {
+        .topbar {
+          padding: 12px 16px;
+        }
+
+        .brand-name {
+          font-size: 0.96rem;
+        }
+
+        .page {
+          width: min(100% - 18px, 1240px);
+          margin-top: 18px;
+        }
+
+        .hero-copy {
+          padding: 18px 16px;
+        }
+
+        .modal-top {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .bar-row {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="brand">
+          <div class="brand-mark">
+            <img id="logoImage" alt="LightTiers logo" />
+          </div>
+          <div id="siteName" class="brand-name">LightTiers</div>
+        </div>
+
+        <div class="topbar-actions">
+          <button class="discord-btn" id="discordBtn" type="button">Join Discord</button>
+          <select id="themeSelect" class="theme-select" aria-label="Theme select">
+            <option value="Black">Black</option>
+            <option value="Light">Light</option>
+            <option value="Midnight">Midnight</option>
+            <option value="Purple">Purple</option>
+            <option value="Forest">Forest</option>
+            <option value="Crimson">Crimson</option>
+            <option value="Sunset">Sunset</option>
+          </select>
+        </div>
+      </header>
+
+      <main class="page">
+        <div id="adminBar" class="admin-bar"></div>
+
+        <section class="hero">
+          <div class="hero-copy">
+            <div class="eyebrow">PvP Rankings</div>
+            <h1 id="headlineText">LightTiers PvP Tierlist</h1>
+            <p id="subtitleText" class="subtitle">Tracking the strongest players across the most competitive Minecraft PvP modes.</p>
+          </div>
+          <div id="heroBanner" class="hero-banner" aria-label="Wide banner"></div>
+        </section>
+
+        <section id="podium" class="podium" aria-live="polite"></section>
+
+        <section class="toolbar">
+          <div id="gamemodeTabs" class="gamemode-tabs"></div>
+          <div class="filter-row">
+            <input id="searchInput" class="search-box" type="search" placeholder="Search player name..." aria-label="Search players" />
+            <select id="regionFilter" class="region-select" aria-label="Filter by region"></select>
+          </div>
+        </section>
+
+        <section id="rankingList" class="ranking-list" aria-live="polite"></section>
+      </main>
+    </div>
+
+    <div id="modalBackdrop" class="modal-backdrop"></div>
+    <div id="playerModal" class="player-modal" aria-live="polite"></div>
+
+    <script src="./data.js"></script>
+  </body>
+</html>
